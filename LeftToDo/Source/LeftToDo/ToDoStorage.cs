@@ -3,21 +3,21 @@ using System.Collections.Generic;
 
 namespace LeftToDo
 {
-public class ToDos
+public class ToDoStorage
     {
-        List<Task> todoList;
-        List<Task> archivedList;
+        List<Tasks> todoList;
+        List<Tasks> archivedList;
 
-        public ToDos(){
-            todoList = new List<Task>();
-            archivedList = new List<Task>();
+        public ToDoStorage(){
+            todoList = new List<Tasks>();
+            archivedList = new List<Tasks>();
         }
         
-        public void AddTaskToToDoList(Task task) { 
+        public void AddTaskToToDoList(Tasks task) { 
             todoList.Add(task);
         }
         
-        public void AddTaskToArchiveList (Task task) {
+        public void AddTaskToArchiveList (Tasks task) {
             archivedList.Add(task);
         }
 
@@ -42,8 +42,20 @@ public class ToDos
         {
             return archivedList.Count;
         }
-        public List<Task> GetToDoList(){
+        public List<Tasks> GetToDoList(){
             return todoList;
         }
+        public string GetAllTasks()
+        {
+            string taskString = "";
+            int count = 1;
+            foreach (Tasks task in todoList)
+            {
+                taskString += $"({count}) [ ] {task.GetTaskString()}\n";
+                count++;
+            }
+            return taskString;
+        }
+
     }
 }

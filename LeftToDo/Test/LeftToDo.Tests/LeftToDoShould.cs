@@ -7,14 +7,14 @@ namespace LeftToDo.Tests
     
     public class LeftToDoShould
     {
-        ToDos todoList;
-        Task task1;
-        Task task2;
+        ToDoStorage todoList;
+        Tasks task1;
+        Tasks task2;
 
          public LeftToDoShould() {
-             todoList = new ToDos();
-             task1 = new Task("Do");
-             task2  = new Task("Do2"); 
+             todoList = new ToDoStorage();
+             task1 = new PlainTask("Do");
+             task2  = new PlainTask("Do2"); 
         } 
 
         [Fact]
