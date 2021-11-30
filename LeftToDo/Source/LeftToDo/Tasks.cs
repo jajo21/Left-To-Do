@@ -2,14 +2,14 @@ using System;
 
 namespace LeftToDo
 {
-    public class Task
+    public abstract class Tasks
     {
-        string taskToDo;
+        string taskDescription;
         bool markedAsDone;
-
-        public Task(string taskToDo) {
+        
+        public Tasks(string taskDescription) {
+            this.taskDescription = taskDescription;
             markedAsDone = false;
-            this.taskToDo = taskToDo;
         }
 
         public void SetTaskAsDone()
@@ -24,8 +24,7 @@ namespace LeftToDo
         public bool CheckIfTaskIsDone() {
             return markedAsDone;
         }
-        public string GetTaskString() {
-            return taskToDo;
-        }
+
+        public abstract string GetTaskString();
     }
 }

@@ -7,7 +7,7 @@ namespace LeftToDo
         static void Main(string[] args)
         {
             Menu leftToDo = new Menu();
-            leftToDo.RunMenu();
+            leftToDo.RunStartMenu();
         }
     }
 }
