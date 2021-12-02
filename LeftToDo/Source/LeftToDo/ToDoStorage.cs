@@ -3,22 +3,25 @@ using System.Collections.Generic;
 
 namespace LeftToDo
 {
-public class ToDoStorage
+    public class ToDoStorage
     {
-        List<Tasks> todoList;
-        List<Tasks> archivedList;
+        List<Task> todoList;
+        List<Task> archivedList;
 
-        public ToDoStorage(){
-            todoList = new List<Tasks>();
-            archivedList = new List<Tasks>();
+        public ToDoStorage()
+        {
+            todoList = new List<Task>();
+            archivedList = new List<Task>();
         }
-        
-        public void AddTaskToToDoList(Tasks task) { 
-            todoList.Add(task);
+
+        public void AddTaskToToDoList(Task taskToAdd)
+        {
+            todoList.Add(taskToAdd);
         }
-        
-        public void AddTaskToArchiveList (Tasks task) {
-            archivedList.Add(task);
+
+        public void AddTaskToArchiveList(Task taskToAdd)
+        {
+            archivedList.Add(taskToAdd);
         }
 
         public void ArchieveTasksMarkedAsDone()
@@ -30,7 +33,7 @@ public class ToDoStorage
                     AddTaskToArchiveList(todoList[i]);
                     todoList.Remove(todoList[i]);
                     i--;
-                } 
+                }
             }
         }
 
@@ -42,20 +45,71 @@ public class ToDoStorage
         {
             return archivedList.Count;
         }
-        public List<Tasks> GetToDoList(){
+        public List<Task> GetToDoList()
+        {
             return todoList;
         }
-        public string GetAllTasks()
+        public List<Task> GetArchivedList()
+        {
+            return archivedList;
+        }
+
+        public string GetAllTasksInTodoList()
         {
             string taskString = "";
             int count = 1;
-            foreach (Tasks task in todoList)
+            foreach (Task task in todoList)
             {
-                taskString += $"({count}) [ ] {task.GetTaskString()}\n";
-                count++;
+                var taskIsDone = task.CheckIfTaskIsDone();
+                if (taskIsDone)
+                {
+                    taskString += $"({count}) [X] {task.GetTaskString()}\n";
+                    count++;
+                }
+                else
+                {
+                    taskString += $"({count}) [ ] {task.GetTaskString()}\n";
+                    count++;
+                }
+
+            }
+            return taskString;
+        }
+        public string GetAllTasksInArchivedList()
+        {
+            string taskString = "";
+            int count = 1;
+            foreach (Task task in archivedList)
+            {
+                var taskIsDone = task.CheckIfTaskIsDone();
+                if (taskIsDone)// Behöver ingen if sats här.. Ta bort när du är säker på programmet
+                {
+                    taskString += $"({count}) [X] {task.GetTaskString()}\n"; 
+                    count++;
+                }
+                else
+                {
+                    taskString += $"({count}) [ ] {task.GetTaskString()}\n";
+                    count++;
+                }
             }
             return taskString;
         }
 
+        public void SetTaskInToDoListAsDone(int taskToSet)
+        {
+            if (taskToSet <= todoList.Count && taskToSet > 0)
+            {
+                for (var i = 0; i < todoList.Count; i++)
+                {
+                    todoList[taskToSet - 1].SetTaskAsDone();
+                }
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Felaktig inmatning. Du måste välja ett nummer ur din lista!");
+            }
+
+        }
     }
 }
