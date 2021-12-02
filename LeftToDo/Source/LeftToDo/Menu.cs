@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace LeftToDo
 {
@@ -34,13 +35,13 @@ namespace LeftToDo
                         RunAddToDoMenu();
                         break;
                     case "2":
-                        PrintAllTasks();
+                        PrintAllTasksAndSetToDone();
                         break;
                     case "3":
-                        Console.WriteLine($"3");
+                        PrintAllArchivedTasks();
                         break;
                     case "4":
-                        Console.WriteLine($"4");
+                        ArchiveAllTasksMarkedAsDone();
                         break;
                     case "Q":
                         return;
@@ -56,38 +57,39 @@ namespace LeftToDo
         }
         public void RunAddToDoMenu()
         {
-            Console.Clear();
-            Console.WriteLine("Vilken typ av uppgift vill du skapa?");
-            Console.WriteLine("[1] Tidlös uppgift");
-            Console.WriteLine("[2] Uppgift med deadline");
-            Console.WriteLine("[3] Uppgift med checklista");
-            Console.WriteLine("[Q] Avbryt\n");
-            Console.Write("Skriv här: ");
-
-            menuChoice = Console.ReadLine();
-            switch (menuChoice)
+            while (true)
             {
-                case "1":
-                    AddPlainTask();
-                    break;
-                case "2":
-                    AddDeadlineTask();
-                    break;
-                case "3":
-                    AddChecklistTask();
-                    break;
-                case "Q":
-                    Console.Clear();
-                    break;
-                default:
-                    Console.WriteLine("\nFelaktig inmatning! Du kan bara mata in siffror mellan 1-3, eller Q för att avsluta programmet.");
-                    Console.WriteLine("Gå gärna tillbaka till menyn och försök igen!");
-                    Console.WriteLine("\n---Tryck på valfri tangent för att gå tillbaka till menyn---");
-                    Console.ReadKey();
-                    Console.Clear();
-                    RunAddToDoMenu();
-                    break;
+                Console.Clear();
+                Console.WriteLine("Vilken typ av uppgift vill du skapa?");
+                Console.WriteLine("[1] Tidlös uppgift");
+                Console.WriteLine("[2] Uppgift med deadline");
+                Console.WriteLine("[3] Uppgift med checklista");
+                Console.WriteLine("[0] Avbryt och gå tillbaka till startmenyn\n");
+                Console.Write("Skriv här: ");
 
+                menuChoice = Console.ReadLine();
+                switch (menuChoice)
+                {
+                    case "1":
+                        AddPlainTask();
+                        break;
+                    case "2":
+                        AddDeadlineTask();
+                        break;
+                    case "3":
+                        AddChecklistTask();
+                        break;
+                    case "0":
+                        Console.Clear();
+                        return;
+                    default:
+                        Console.WriteLine("\nFelaktig inmatning! Du kan bara mata in siffror mellan 1-3, eller Q för att avsluta programmet.");
+                        Console.WriteLine("Gå gärna tillbaka till menyn och försök igen!");
+                        Console.WriteLine("\n---Tryck på valfri tangent för att gå tillbaka till menyn---");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                }
             }
         }
 
@@ -109,8 +111,22 @@ namespace LeftToDo
 
             Console.WriteLine("\nSkriv in vilket datum uppgiften ska va klar i formatet YYYY/MM/DD.");
             Console.Write($"Skriv här: ");
-            string deadline = Console.ReadLine(); // Behöver felhantering här eller i klassen
-            leftToDo.AddTaskToToDoList(new Deadline(task, deadline));
+
+            while (true)
+            {
+                string deadline = Console.ReadLine();
+
+                if (!DateTime.TryParseExact(deadline, "yyyy/MM/dd", null, DateTimeStyles.None, out DateTime date))
+                {
+                    Console.WriteLine($"Felaktig inmatning av datum. Testa igen! Format: YYYY/MM/DD\n");
+                    Console.Write($"Skriv här:");
+                }
+                else
+                {
+                    leftToDo.AddTaskToToDoList(new Deadline(task, deadline));
+                    break;
+                }
+            }
             Console.Clear();
         }
         //AddCheckListTask behöver ändras/fixas.. Hur sparar man i den nya listan som ligger i Checklist? Hur kommer jag åt listan?
@@ -126,17 +142,18 @@ namespace LeftToDo
             Console.WriteLine("Börja med att skriva in huvuduppgiften här och klicka sedan på Enter.\n");
             Console.Write($"Skriv här: ");
             string task = Console.ReadLine();
-            leftToDo.AddTaskToToDoList(new Checklist(task));
+            Checklist checklistStorage = new Checklist(task);
+            leftToDo.AddTaskToToDoList(checklistStorage);
 
             int count = 1;
             while (true)
-            {   
+            {
                 Console.Clear();
                 Console.WriteLine($"Vill du skriva delmål nummer {count} till uppgiften \"{task}\"?");
                 Console.WriteLine("[1] Ja");
                 Console.WriteLine("[2] Nej");
                 Console.Write($"\nSkriv här: ");
-                
+
                 menuChoice = Console.ReadLine();
                 switch (menuChoice)
                 {
@@ -145,7 +162,13 @@ namespace LeftToDo
                         Console.WriteLine($"Delmål nummer {count}: ");
                         Console.Write($"\nSkriv här: ");
                         string subTask = Console.ReadLine();
-                        Console.WriteLine($"Spara ... {subTask} ... Någonstans");
+                        checklistStorage.AddSubTaskToChecklist(new ChecklistSubTask(subTask));
+
+                        Console.Clear();
+                        Console.WriteLine("Delmål adderat!");
+                        Console.WriteLine("Din nuvarande uppgift ser ut såhär: \n");
+                        Console.WriteLine(checklistStorage.GetTaskString());
+                        Console.WriteLine("---Tryck på valfri tangent för att gå tillbaka och göra fler val---");
                         Console.ReadKey();
                         break;
                     case "2":
@@ -153,28 +176,102 @@ namespace LeftToDo
                         return;
                     default:
                         Console.WriteLine("\nFelaktig inmatning! Du kan bara mata in siffror mellan 1-2");
-                        Console.WriteLine("Gå gärna tillbaka till menyn och försök igen!");
-                        Console.WriteLine("\n---Tryck på valfri tangent för att gå tillbaka till menyn---");
+                        Console.WriteLine("\n---Tryck på valfri tangent för att gå tillbaka och göra ett nytt val---");
+                        count--;
                         Console.ReadKey();
                         break;
                 }
-                count ++;
+                count++;
             }
         }
-        public void PrintAllTasks()
+        public void PrintAllTasksAndSetToDone()
         {
             Console.Clear();
-            Console.WriteLine("Här är alla dina uppgifter:");
-            Console.WriteLine("Vill du markera en uppgift som avklarad, tryck på motsvarande siffra och sedan Enter.");
-            Console.WriteLine("Annars klicka på Q och enter för att gå tillbaka till menyn.\n");
+            while (true)
+            {
+                Console.WriteLine("Här är alla dina uppgifter:");
+                Console.WriteLine("Vill du markera en uppgift som avklarad, tryck på motsvarande siffra och sedan Enter.");
+                Console.WriteLine("Annars klicka på 0 och sedan Enter för att gå tillbaka till menyn.\n");
+                Console.WriteLine(leftToDo.GetAllTasksInTodoList());      //Skriv ut alla todos till användaren
 
-            Console.WriteLine(leftToDo.GetAllTasks());
 
-            Console.Write("Skriv här:");
+                var todoList = leftToDo.GetToDoList();      //Hämta listan för att kunna loopa genom den
 
-            Console.WriteLine("\n---Tryck på valfri tangent för att gå tillbaka till menyn---");
+                Console.Write("Skriv här: ");
+
+                while (true)
+                {
+                    string input = Console.ReadLine();
+                    if (input == "0")
+                    {
+                        Console.Clear();
+                        return;
+                    }
+                    else
+                    {
+                        if (Int32.TryParse(input, out int chooseTask))
+                        {
+                            try
+                            {
+                                leftToDo.SetTaskInToDoListAsDone(chooseTask);
+                                Console.Clear();
+                                break;
+                            }
+                            catch (ArgumentOutOfRangeException ex)
+                            {
+                                Console.WriteLine("\n" + ex.Message);
+                                Console.WriteLine("Testa igen!");
+                                Console.Write("\nSkriv här:");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Felaktig inmatning. Du måste skriva en siffra. Testa igen!");
+                            Console.Write("\nSkriv här: ");
+                        }
+                    }
+                }
+            }
+        }
+        public void PrintAllArchivedTasks()
+        {
+            Console.Clear();
+            Console.WriteLine($"Här är alla dina arkiverade uppgifter:\n"); // Skapa en metod för det
+            Console.WriteLine(leftToDo.GetAllTasksInArchivedList());
+            Console.WriteLine("\n---Tryck på valfri tangent för att gå tillbaka till startmenyn---");
             Console.ReadKey();
             Console.Clear();
+
+        }
+        public void ArchiveAllTasksMarkedAsDone()
+        {
+            Console.Clear();
+            leftToDo.ArchieveTasksMarkedAsDone(); // Arkiverar uppgifterna som är färdigmarkerade, skriv ett flöde och förklaringar till användaren
+            Console.WriteLine("Alla färdiga uppgifter är arkiverade!");
+            Console.WriteLine("\n---Tryck på valfri tangent för att gå tillbaka till startmenyn---");
+            Console.ReadKey();
+            Console.Clear();
+        }
+        private int ReadLineCheckInteger()
+        {
+            int number;
+            while (true)
+            {
+                try
+                {
+                    number = Convert.ToInt32(Console.ReadLine());
+                    if (number.ToString() != null)
+                    {
+                        break;
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("\nFelaktigt inmatning. Du kan bara mata in siffror. Testa igen!");
+                    Console.Write("\nSkriv här: ");
+                }
+            }
+            return number;
         }
     }
 }

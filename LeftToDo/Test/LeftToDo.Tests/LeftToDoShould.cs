@@ -8,8 +8,8 @@ namespace LeftToDo.Tests
     public class LeftToDoShould
     {
         ToDoStorage todoList;
-        Tasks task1;
-        Tasks task2;
+        Task task1;
+        Task task2;
 
          public LeftToDoShould() {
              todoList = new ToDoStorage();
@@ -54,7 +54,7 @@ namespace LeftToDo.Tests
         }
         [Fact]
         public void test1(){
-
+            // Gör två till test!
         }
     }
 }

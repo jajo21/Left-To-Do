@@ -2,11 +2,9 @@ using System;
 
 namespace LeftToDo
 {
-    public class PlainTask : Task
+    public class ChecklistSubTask : Task
     {
-        public PlainTask(string taskDescription) : base(taskDescription)
-        {
-        }
+        public ChecklistSubTask(string taskDescription) : base(taskDescription){}
         public override string GetTaskString() {
             return this.taskDescription;
         }
