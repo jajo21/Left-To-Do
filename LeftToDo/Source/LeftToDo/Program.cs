@@ -6,7 +6,7 @@ namespace LeftToDo
     {
         static void Main(string[] args)
         {
-            Menu leftToDo = new Menu();
+            Application leftToDo = new Application();
             leftToDo.RunStartMenu();
         }
     }

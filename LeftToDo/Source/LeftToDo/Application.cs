@@ -3,11 +3,11 @@ using System.Globalization;
 
 namespace LeftToDo
 {
-    class Menu
+    class Application
     {
         ToDoStorage leftToDo;
         string menuChoice;
-        public Menu()
+        public Application()
         {
             leftToDo = new ToDoStorage();
         }
@@ -214,13 +214,13 @@ namespace LeftToDo
                             try
                             {
                                 leftToDo.SetTaskInToDoListAsDone(chooseTask);
+                                //subtasklist
                                 Console.Clear();
                                 break;
                             }
-                            catch (ArgumentOutOfRangeException ex)
+                            catch 
                             {
-                                Console.WriteLine("\n" + ex.Message);
-                                Console.WriteLine("Testa igen!");
+                                Console.WriteLine("\nFelaktig inmatning. Du kan bara skriva nummer som finns i listan. Testa igen!");
                                 Console.Write("\nSkriv här:");
                             }
                         }

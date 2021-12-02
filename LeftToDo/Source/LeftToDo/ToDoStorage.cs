@@ -82,7 +82,7 @@ namespace LeftToDo
             foreach (Task task in archivedList)
             {
                 var taskIsDone = task.CheckIfTaskIsDone();
-                if (taskIsDone)// Behöver ingen if sats här.. Ta bort när du är säker på programmet
+                if (taskIsDone) // Behöver ingen if sats här.. Ta bort när du är säker på programmet
                 {
                     taskString += $"({count}) [X] {task.GetTaskString()}\n";
                     count++;
@@ -97,23 +97,36 @@ namespace LeftToDo
         }
 
         public void SetTaskInToDoListAsDone(int taskToSet)
-        {    
-            if(IsTaskAnChecklistTask(taskToSet)) {
-                
+        {
+            if (IsTaskAnChecklistTask(taskToSet))
+            {
+                //subTaskList
             }
-            else {
+            else
+            {
                 todoList[taskToSet - 1].SetTaskAsDone();
-            }   
+            }
         }
-        public bool IsTaskAnChecklistTask(int taskToCheck){
-            
-                if(todoList[taskToCheck - 1] is Checklist) {
-                    return true;
+        public bool IsTaskAnChecklistTask(int taskToCheck)
+        {
+
+            if (todoList[taskToCheck - 1] is Checklist)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void GetAllCheckLists()
+        {
+            foreach(var task in todoList)
+            {
+                if(task is Checklist) {
+                    
                 }
-                else {
-                    return false;
-                }
-            
+            }
         }
     }
 }

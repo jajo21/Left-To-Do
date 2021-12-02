@@ -37,6 +37,10 @@ namespace LeftToDo
             }
             return subTaskString;
         }
+        public void SetTaskInSubTaskListAsDone(int taskToSet)
+        {    
+            subTaskList[taskToSet - 1].SetTaskAsDone();   
+        }
 
         public override string GetTaskString()
         {
