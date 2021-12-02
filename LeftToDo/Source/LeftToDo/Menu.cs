@@ -236,7 +236,7 @@ namespace LeftToDo
         public void PrintAllArchivedTasks()
         {
             Console.Clear();
-            Console.WriteLine($"Här är alla dina arkiverade uppgifter:\n"); // Skapa en metod för det
+            Console.WriteLine($"Här är alla dina arkiverade uppgifter:\n"); 
             Console.WriteLine(leftToDo.GetAllTasksInArchivedList());
             Console.WriteLine("\n---Tryck på valfri tangent för att gå tillbaka till startmenyn---");
             Console.ReadKey();
@@ -246,32 +246,11 @@ namespace LeftToDo
         public void ArchiveAllTasksMarkedAsDone()
         {
             Console.Clear();
-            leftToDo.ArchieveTasksMarkedAsDone(); // Arkiverar uppgifterna som är färdigmarkerade, skriv ett flöde och förklaringar till användaren
+            leftToDo.ArchieveTasksMarkedAsDone(); 
             Console.WriteLine("Alla färdiga uppgifter är arkiverade!");
             Console.WriteLine("\n---Tryck på valfri tangent för att gå tillbaka till startmenyn---");
             Console.ReadKey();
             Console.Clear();
-        }
-        private int ReadLineCheckInteger()
-        {
-            int number;
-            while (true)
-            {
-                try
-                {
-                    number = Convert.ToInt32(Console.ReadLine());
-                    if (number.ToString() != null)
-                    {
-                        break;
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("\nFelaktigt inmatning. Du kan bara mata in siffror. Testa igen!");
-                    Console.Write("\nSkriv här: ");
-                }
-            }
-            return number;
         }
     }
 }

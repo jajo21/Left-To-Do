@@ -21,9 +21,19 @@ namespace LeftToDo
             int count = 1;
             foreach (Task task in subTaskList)
             {
-                string message = $"({count}) [ ] {task.GetTaskString()}\n";
-                subTaskString += message.PadLeft(message.Length + 4);
-                count++;
+                var taskIsDone = task.CheckIfTaskIsDone();
+                if(taskIsDone)
+                {
+                    string message = $"({count}) [X] {task.GetTaskString()}\n";
+                    subTaskString += message.PadLeft(message.Length + 4);
+                    count++;
+                }
+                else
+                {
+                    string message = $"({count}) [ ] {task.GetTaskString()}\n";
+                    subTaskString += message.PadLeft(message.Length + 4);
+                    count++;
+                }
             }
             return subTaskString;
         }

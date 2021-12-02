@@ -84,7 +84,7 @@ namespace LeftToDo
                 var taskIsDone = task.CheckIfTaskIsDone();
                 if (taskIsDone)// Behöver ingen if sats här.. Ta bort när du är säker på programmet
                 {
-                    taskString += $"({count}) [X] {task.GetTaskString()}\n"; 
+                    taskString += $"({count}) [X] {task.GetTaskString()}\n";
                     count++;
                 }
                 else
@@ -97,19 +97,23 @@ namespace LeftToDo
         }
 
         public void SetTaskInToDoListAsDone(int taskToSet)
-        {
-            if (taskToSet <= todoList.Count && taskToSet > 0)
-            {
-                for (var i = 0; i < todoList.Count; i++)
-                {
-                    todoList[taskToSet - 1].SetTaskAsDone();
+        {    
+            if(IsTaskAnChecklistTask(taskToSet)) {
+                
+            }
+            else {
+                todoList[taskToSet - 1].SetTaskAsDone();
+            }   
+        }
+        public bool IsTaskAnChecklistTask(int taskToCheck){
+            
+                if(todoList[taskToCheck - 1] is Checklist) {
+                    return true;
                 }
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException("Felaktig inmatning. Du måste välja ett nummer ur din lista!");
-            }
-
+                else {
+                    return false;
+                }
+            
         }
     }
 }
