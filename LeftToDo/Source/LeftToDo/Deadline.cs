@@ -19,15 +19,7 @@ namespace LeftToDo
             DateTime today = DateTime.Today;
             TimeSpan timeLeft = deadlineDate - today;
             int daysLeft = timeLeft.Days;
-            if (daysLeft >= 0)
-            {
-                return daysLeft;
-            }
-            else
-            {
-                daysLeft = 0;
-                return daysLeft;
-            }
+            return daysLeft;
         }
 
         public override string GetTaskString() //Returnerar sträng som overridar superklassens virtuella metod.

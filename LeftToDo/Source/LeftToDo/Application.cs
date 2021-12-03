@@ -23,7 +23,7 @@ namespace LeftToDo
             Console.Clear();
             while (true)
             {
-                Console.WriteLine("Left To Do");
+                Console.WriteLine("Left To Do - Din egen AttGöra-Lista");
                 Console.WriteLine("Gör dina menyval genom att trycka på en siffra och sedan Enter.");
                 Console.WriteLine("Här kan du välja vad du vill göra:\n");
                 Console.WriteLine("[1] Lägga till en ny uppgift");
