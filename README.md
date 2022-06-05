@@ -20,7 +20,7 @@
 * xUnit
 
 ## Kravspecifikation
- |Krav|Uppfyllt|Krav-spec och eventuellt egen kommentarer|
+ |Krav|Uppfyllt|Förklaring|
  |---|---|---|
 |**1**  |**Ja**| *Lösningen ska bestå av en konsolapplikation skriven i C# som är körbar med .NET Core*|
 |**2**  |**Ja**| *När man startar programmet ska man mötas av en startmeny som förklarar hur programmet används och låter användaren genomföra resterande krav.*|
