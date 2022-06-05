@@ -25,7 +25,7 @@
 |**1**  |**Ja**| *Lösningen ska bestå av en konsolapplikation skriven i C# som är körbar med .NET Core*|
 |**2**  |**Ja**| *När man startar programmet ska man mötas av en startmeny som förklarar hur programmet används och låter användaren genomföra resterande krav.*|
 |**3**  |**Ja**| *Man ska som användare kunna lista alla dagens uppgifter, alla uppgifter ska då listas om dom inte är "arkiverade".*|
-|**4**  |**Ja**| *När dagens uppgifter är listade ska de kunna markeras som utförda, eller som kvar att göra beroende på sin nuvarande status. Detta kan förslagsvis köra med en symbol som X eller en emoji som ✔️ eller ✅*|**Aningen missnöjd med uppbyggnaden av funktionen i klassen-Application metoden-PrintAllTasksAndSetToDone. Samt att man behöver klicka och fylla i en siffra för att få hela listan att bli avbockad**
+|**4**  |**Ja**| *När dagens uppgifter är listade ska de kunna markeras som utförda, eller som kvar att göra beroende på sin nuvarande status. Detta kan förslagsvis köra med en symbol som X eller en emoji som ✔️ eller ✅*|
 |**5**  |**Ja**| *Från programmets menyer ska man även kunna lägga till en ny uppgift.*|
 |**6**  |**Ja**| *Från programmets menyer ska man även kunna arkivera alla uppgifter som för närvarande är utförda.*|
 |**7**  |**Ja**| *Man ska kunna lista alla arkiverade uppgifter, det behöver inte gå att göra något med uppgifterna när de listas på detta vis.*|
