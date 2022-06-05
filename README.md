@@ -1,23 +1,26 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-f059dc9a6f8d3a56e377f745f24479a46679e63a5d9fe6f495e02850cd0d8118.svg)](https://classroom.github.com/online_ide?assignment_repo_id=6469242&assignment_repo_type=AssignmentRepo)
-# Left To Do
 
-> Du ska skapa en konsolapplikation för att hålla koll på, och ordna arbetsuppgifter
-> 
-> [Gå till uppgiften](https://ju.instructure.com/courses/5951/assignments/22264)
+# Left To Do - December 2021
+## Instruktioner för att starta applikationen
+1. Ladda ner repot från https://github.com/jajo21/Left-To-Do
+2. Leta upp valfri terminal och utgå från mappen "LeftToDo/Source/LeftToDo"
+3. Applikationen kräver att du har .NET SDK installerat
+4. Skriv kommandot ```dotnet run``` i terminalen
+5. Applikationen körs nu i terminalen
 
-## Instruktioner
+## Syfte - YH-utbildning: Webbutvecklare .NET
+* Inlämningsuppgift i kursen Objektorienterad Programmering med C# - December 2021
+* Beskrivning: Du ska i denna uppgift skapa en konsolapplikation för att hålla koll på, och ordna arbetsuppgifter; det vill säga en digital att-göra lista. Applikationen ska ha namnet Left To Do. En användare ska vid användning av programmet kunna se vad som är kvar att göra i listan, markera uppgifter som avklarade, lägga till nya uppgifter i listan samt arkivera avklarade uppgifter.
+* Resultat: 100/100 (VG)
 
-*Vad behöver göras för att ditt program ska starta och gå och använda?*
-**Kräver .NET SDK**
-**Navigera till rätt mapp och skriv "dotnet run" i terminalen**
+## Tekniker
+* .NET Core
+* .NET Core CLI
+* OOP
+* C#
+* xUnit
 
-## Självskattning
->**OBS:** Byt ut dina egna uppdateringar från *kurisiv text* till **fetmarkerad**.
-
-*Uppdatera den här listan med vilka krav du uppfyllt och ev. inte blivit klar med eller valt att inte göra, lämna gärna egna kommentarer om lösningen eller*
-
-
- |Krav|Uppfyllt|Egna Kommentarer|
+## Kravspecifikation
+ |Krav|Uppfyllt|Krav-spec och eventuellt egen kommentarer|
  |---|---|---|
 |**1**  |**Ja**| *Lösningen ska bestå av en konsolapplikation skriven i C# som är körbar med .NET Core*|
 |**2**  |**Ja**| *När man startar programmet ska man mötas av en startmeny som förklarar hur programmet används och låter användaren genomföra resterande krav.*|
